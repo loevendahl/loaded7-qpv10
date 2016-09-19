@@ -1,0 +1,74 @@
+Setup 
+
+
+FOR NEW INSTALLATIONS:
+
+1.
+Uplod all folders and files in folder loaded7/catalog
+to corresponding folders in your website catalog
+
+2. install and configure your new payment module in Loaded Commerce admin->Addons->Payment
+3. configure your new order total module in Loaded Commerce admin Dashboard->Settings->Setup->Modules->Order Total Modules
+
+FOR EXISTING iNSTALLATIONS
+
+1.
+Upload all folders and files in folder loaded7/catalog
+to corresponding folders in your website catalog
+EXCEPT for the file loaded7/catalog/admin/includes/applications/orders/pages/tabs/summary.php
+
+2.
+In file (your website catalog)/admin/includes/applications/orders/pages/tabs/summary.php line 177
+
+replace
+
+<div class="field-drop-tabs field-drop-tabs-no-left button-height black-inputs">
+
+with
+
+     <div class="field-drop-tabs field-drop-tabs-no-left button-height black-inputs">
+     <!-- quickpay added --> 
+       <?php if(strstr($oInfo->get('paymentMethod'),"Quickpay")){  
+
+		include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/classes/quickpay5.php");
+             	include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_js.php");
+		$qpreturnvals = array();
+
+    $Qhistory = $lC_Database->query('select oth.transaction_code, oth.transaction_return_value, oth.transaction_return_status, oth.date_added, ots.status_name from :table_orders_transactions_history oth left join :table_orders_transactions_status ots on (oth.transaction_code = ots.id and ots.language_id = :language_id) where oth.orders_id = :orders_id order by oth.date_added');
+    $Qhistory->bindTable(':table_orders_transactions_history', TABLE_ORDERS_TRANSACTIONS_HISTORY);
+    $Qhistory->bindTable(':table_orders_transactions_status', TABLE_ORDERS_TRANSACTIONS_STATUS);
+    $Qhistory->bindInt(':language_id', $lC_Language->getID());
+    $Qhistory->bindInt(':orders_id', $oInfo->get('oID'));
+    $Qhistory->execute();
+
+    while ($Qhistory->next()) {
+      $qpreturnvals[] = array('status_id' => $Qhistory->valueInt('transaction_code'),
+                                            'status' => $Qhistory->value('status_name'),
+                                            'return_value' => $Qhistory->value('transaction_return_value'),
+                                            'return_status' => $Qhistory->valueInt('transaction_return_status'),
+                                            'date_added' => $Qhistory->value('date_added'));
+    }
+			$qp = new quickpay;
+			$xmlObj = simplexml_load_string($qpreturnvals[0]["return_value"]);
+                        $responseArr = $qp->objectsIntoArray($xmlObj);
+
+			  $transaction = $responseArr["transaction"];
+			  $cardtype = $responseArr["cardtype"];
+			  $cardnumber = $responseArr["cardnumber"];
+			  $cardhash = $responseArr["cardhash"];
+			  
+			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/functions/quickpay5.php");
+			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_actions.php");
+			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_gui_admin.php");
+			  
+			     ?>
+        
+   
+          <?php
+			  }
+	  ?>
+      <!-- quickpay added end -->
+
+
+3. install and configure your new payment module in Loaded Commerce admin->Addons->Payment
+4. configure your new order total module in Loaded Commerce admin Dashboard->Settings->Setup->Modules->Order Total Modules

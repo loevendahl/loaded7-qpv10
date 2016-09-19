@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <definitions>
+    <definition>
+      <key>order_total_paymentfee_title</key>
+      <value><![CDATA[Payment fee]]></value>
+      <group>modules-order_total</group>
+    </definition>
+    <definition>
+      <key>order_total_paymentfee_description</key>
+      <value><![CDATA[Order Payment fee]]></value>
+      <group>modules-order_total</group>
+    </definition>
+  </definitions>
+</language>
