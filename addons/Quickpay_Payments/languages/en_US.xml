@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <definitions>
+    <definition>
+      <key>addon_payment_quickpaypayments_title</key>
+      <value><![CDATA[Quickpay Payments]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>addon_payment_quickpaypayments_description</key>
+      <value><![CDATA[Quickpay integrates an extensive range of online payment options to your webshop. Creditcards, internet banks, paypal, invoice and more. See all options here: <a href="http://quickpay.dk/features/cardtypelock/" target="_blank"><u>Available options</u>)</a>.]]></value>
+      <group>checkout</group>
+    </definition>  
+    <definition>
+      <key>payment_quickpaypayments_title</key>
+      <value><![CDATA[Quickpay online Payments]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>payment_quickpaypayments_method_title</key>
+      <value><![CDATA[Quickpay gateway]]></value>
+      <group>checkout</group>
+    </definition> 
+    <definition>
+      <key>payment_quickpaypayments_method_blurb</key>
+      <value><![CDATA[powered by <img src="addons/Quickpay_Payments/images/quickpay-small.png" alt="Quickpay Payments" style="vertical-align:middle">]]></value>
+      <group>checkout</group>
+    </definition> 
+	    <definition>
+      <key>payment_quickpaypayments_error_payment_problem</key>
+      <value><![CDATA[ERROR: %s. Please try again.]]></value>
+      <group>checkout</group>
+    </definition>
+<definition>
+      <key>addons_payment_quickpay_payments_js_no_cardlock_selected</key>
+      <value><![CDATA[No Quickpay Payment method selected.]]></value>
+      <group>checkout</group>
+    </definition>
+<definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_TITLE</key>
+      <value><![CDATA[QuickPay: Online Payment]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_PUBLIC_TITLE</key>
+      <value><![CDATA[QuickPay: Online Payment]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_DESCRIPTION</key>
+      <value><![CDATA[QuickPay Advanced Online payment]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_EMAIL_FOOTER</key>
+      <value><![CDATA[Payment is now reserved. When the order is handled, the amount is transferetd to STORE_NAME]></value>
+      <group>checkout</group>
+    </definition> 
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_CREDITCARD_TEXT</key>
+      <value><![CDATA[Creditcard]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_SELECT_CARD</key>
+      <value><![CDATA[* Select what kind of payment type you want to use for your online payment\n]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_WAIT</key>
+      <value><![CDATA[Please wait a moment. Payment page is prepared...]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TEXT_ERROR</key>
+      <value><![CDATA[Unable to process online payment]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_MERCHANT_UNKNOWN</key>
+      <value><![CDATA[Unknown Merchant Number]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_CARDNO_NOT_VALID</key>
+      <value><![CDATA[Invalid card number]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_CVC_NOT_VALID</key>
+      <value><![CDATA[Invalid control digits]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_ORDERID</key>
+      <value><![CDATA[Invalid or missing OrderId]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_TRANSACTION_DECLINED</key>
+      <value><![CDATA[Transaction was not approved]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_WRONG_NUMBER_FORMAT</key>
+      <value><![CDATA[Invalid format of amount]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_ILLEGAL_TRANSACTION</key>
+      <value><![CDATA[Invalid transaction]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_TRANSACTION_EXPIRED</key>
+      <value><![CDATA[Transactionen time out]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_NO_ANSWER</key>
+      <value><![CDATA[No reply]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_SYSTEM_FAILURE</key>
+      <value><![CDATA[System error]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_CARD_EXPIRED</key>
+      <value><![CDATA[Card has expired]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_COMMUNICATION_FAILURE</key>
+      <value><![CDATA[Communication error]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_INTERNAL_FAILURE</key>
+      <value><![CDATA[Internal error]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_CARD_NOT_REGISTERED</key>
+      <value><![CDATA[Not in the system]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_RETRY_FAILURE</key>
+      <value><![CDATA[Unable to process transaction twice]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_UNKNOWN</key>
+      <value><![CDATA[Error in the typed text]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ERROR_CANCELLED</key>
+      <value><![CDATA[Transaction was cancelled]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_JCB_3D_TEXT</key>
+      <value><![CDATA[JCB 3D-Secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MAESTRO_3D_TEXT</key>
+      <value><![CDATA[Maestro 3D-Secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MAESTRO_DK_3D_TEXT</key>
+      <value><![CDATA[Maestro 3D-Secure (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_3D_TEXT</key>
+      <value><![CDATA[MasterCard 3D-Secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_DK_3D_TEXT</key>
+      <value><![CDATA[Mastercard 3D-Secure (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_3D_TEXT</key>
+      <value><![CDATA[Visa 3D-Secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_DK_3D_TEXT</key>
+      <value><![CDATA[Visa 3D-Secure (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_ELECTRON_3D_TEXT</key>
+      <value><![CDATA[Visa Electron 3D-Secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_ELECTRON_DK_3D_TEXT</key>
+      <value><![CDATA[Visa Electron 3D-Secure (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_DEBET_3D_TEXT</key>
+      <value><![CDATA[Visacard debet 3D-secure ]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_DEBET_DK_3D_TEXT</key>
+      <value><![CDATA[Visacard debet 3D-secure (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_CREDITCARD_3D_TEXT</key>
+      <value><![CDATA[Creditcards 3D-secure]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_AMEX_TEXT</key>
+      <value><![CDATA[American Express]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_AMEX_DK_TEXT</key>
+      <value><![CDATA[American Express (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_DANKORT_TEXT</key>
+      <value><![CDATA[Dankort]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_DANSKE_DK_TEXT</key>
+      <value><![CDATA[Danske Netbank]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_DINERS_TEXT</key>
+      <value><![CDATA[Diners Club]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_DINERS_DK_TEXT</key>
+      <value><![CDATA[Diners Club (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_EDANKORT_TEXT</key>
+      <value><![CDATA[eDankort]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_JCB_TEXT</key>
+      <value><![CDATA[JCB]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_TEXT</key>
+      <value><![CDATA[Mastercard]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_DK_TEXT</key>
+      <value><![CDATA[Mastercard (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+   <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_DEBET_TEXT</key>
+      <value><![CDATA[Mastercard debet]]></value>
+      <group>checkout</group>
+    </definition>
+   <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MASTERCARD_DEBET_DK_TEXT</key>
+      <value><![CDATA[Mastercard debet(Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_NORDEA_DK_TEXT</key>
+      <value><![CDATA[Nordea Netbank]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_TEXT</key>
+      <value><![CDATA[Visa]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_DK_TEXT</key>
+      <value><![CDATA[Visa (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_ELECTRON_TEXT</key>
+      <value><![CDATA[Visa Electron]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_VISA_ELECTRON_DK_TEXT</key>
+      <value><![CDATA[Visa Electron (Danish)]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_FBG1886_TEXT</key>
+      <value><![CDATA[Forbrugsforeningen af 1886]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_CREDITCARD_TEXT</key>
+      <value><![CDATA[Creditcards]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAYPAL_TEXT</key>
+      <value><![CDATA[Paypal]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SOFORT_TEXT</key>
+      <value><![CDATA[Sofort]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_IBILL_TEXT</key>
+      <value><![CDATA[ViaBill payment]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_IBILL_DESCRIPTION</key>
+      <value><![CDATA[Buy now - pay when you wish]]></value>
+      <group>checkout</group>
+    </definition>
+    <definition>
+      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_TEXT</key>
+      <value><![CDATA[Paii mobile payment]]></value>
+      <group>checkout</group>
+    </definition>
+  <definition>
+      <key>ENTRY_QUICKPAY_TRANSACTION</key>
+      <value><![CDATA[QuickPay balance:]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>ENTRY_QUICKPAY_CARDHASH</key>
+      <value><![CDATA[Card hash:]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>ENTRY_QUICKPAY_CARDTYPE</key>
+      <value><![CDATA[Card type:]]></value>
+      <group>payment</group>
+    </definition>
+	  <definition>
+      <key>ENTRY_QUICKPAY_CARDNUMBER</key>
+      <value><![CDATA[Card number:]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_CAPTURE_INFO</key>
+      <value><![CDATA[Capture transaction]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_REVERSE_INFO</key>
+      <value><![CDATA[Cancel payment]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_CREDIT_INFO</key>
+      <value><![CDATA[Credit payment]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_TIME_INFO_GREEN</key>
+      <value><![CDATA[Capture possible wihtin PBS-guaranteed period]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_TIME_INFO_YELLOW</key>
+      <value><![CDATA[Last day of PBS-guaranteed capture]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>IMAGE_TRANSACTION_TIME_INFO_RED</key>
+      <value><![CDATA[Last day of PBS-guaranteed capture passed]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>INFO_QUICKPAY_CAPTURED</key>
+      <value><![CDATA[Payment is captured]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>INFO_QUICKPAY_CREDITED</key>
+      <value><![CDATA[Amount is credited]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>INFO_QUICKPAY_REVERSED</key>
+      <value><![CDATA[Payment is cancelled]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>ENTRY_QUICKPAY_TRANSACTION_ID</key>
+      <value><![CDATA[Transaction-id:]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>CONFIRM_REVERSE</key>
+      <value><![CDATA[Do you want to cancel this payment?]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>CONFIRM_CAPTURE</key>
+      <value><![CDATA[Warning: Transaction amount is not identical to order amount. Do you want to capture the payment?]]></value>
+      <group>payment</group>
+    </definition>
+  <definition>
+      <key>CONFIRM_CREDIT</key>
+      <value><![CDATA[Do you want to credit the customer this amount?]]></value>
+      <group>payment</group>
+    </definition>
+  </definitions>
+</language>
