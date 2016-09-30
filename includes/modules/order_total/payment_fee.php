@@ -32,16 +32,26 @@
 
   function process() {
   global $lC_ShoppingCart, $lC_Currencies;
-  $cost = $_SESSION['quickpay_fee'];// -set in pre-confirmation check
+  
+  //when ordertotals are constructed before pre-confirmation check...
+  if(isset($_POST['qp_card'])){
+	 list($fixed_fee, $percent_fee) = explode(':', $_POST['qp_card']);
+	 $cost = ((float) $fixed_fee + (float) $_SESSION['lC_ShoppingCart_data']['total_cost'] * ($percent_fee / 100));
+	  
+  }else{
+  $cost = $_SESSION['quickpay_fee']; // -set in pre-confirmation check
+  
+  }
 
-       if ($cost > 0) {
+   
+	if ($cost > 0) {
           // Don't add tax to card fee, as the fee is taxfree according to Nets
           $lC_ShoppingCart->addToTotal($cost); 
           $this->output[] = array('title' => $this->_title . ':',
                                   'text' => $lC_Currencies->format($cost),
                                   'value' => $cost);
              
-      }
+ }
 
     }
 

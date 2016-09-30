@@ -8,7 +8,7 @@
     </definition>
     <definition>
       <key>addon_payment_quickpaypayments_description</key>
-      <value><![CDATA[Quickpay integrates an extensive range of online payment options to your webshop. Creditcards, internet banks, paypal, invoice and more. See all options here: <a href="http://quickpay.dk/features/cardtypelock/" target="_blank"><u>Available options</u>)</a>.]]></value>
+      <value><![CDATA[Quickpay integrates an extensive range of online payment options to your webshop. Creditcards, internet banks, paypal, invoice and more. See all options here: <a href="https://tech.quickpay.net/appendixes/payment-methods/" target="_blank"><u>Available options</u>)</a>.]]></value>
       <group>checkout</group>
     </definition>  
     <definition>
@@ -420,10 +420,20 @@
       <key>CONFIRM_CAPTURE</key>
       <value><![CDATA[Warning: Transaction amount is not identical to order amount. Do you want to capture the payment?]]></value>
       <group>payment</group>
-    </definition>
+    </definition>	
   <definition>
       <key>CONFIRM_CREDIT</key>
       <value><![CDATA[Do you want to credit the customer this amount?]]></value>
+      <group>payment</group>
+    </definition>
+	<definition>
+	 <key>PENDING</key>
+      <value><![CDATA[Awaiting aquirer approval]]></value>
+      <group>payment</group>
+    </definition>
+		<definition>
+	 <key>SUBCRIPTION_ADMIN</key>
+      <value><![CDATA[Subscription admin not implementet in standard module. Contact developer at a href="http://www.blkom.dk" target="_blank">BLKOM</a> for advanced implementation.]]></value>
       <group>payment</group>
     </definition>
   </definitions>

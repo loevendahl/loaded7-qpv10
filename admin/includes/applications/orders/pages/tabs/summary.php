@@ -1,4 +1,6 @@
 <?php
+//ini_set("display_errors","on");
+//error_reporting(E_ALL);
 /**
   @package    catalog::admin::applications
   @author     Loaded Commerce
@@ -177,37 +179,15 @@
      <!-- quickpay added --> 
        <?php if(strstr($oInfo->get('paymentMethod'),"Quickpay")){  
 
-			  	include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/classes/quickpay5.php");
-             	include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_js.php");
-			    $qpreturnvals = array();
-
-    $Qhistory = $lC_Database->query('select oth.transaction_code, oth.transaction_return_value, oth.transaction_return_status, oth.date_added, ots.status_name from :table_orders_transactions_history oth left join :table_orders_transactions_status ots on (oth.transaction_code = ots.id and ots.language_id = :language_id) where oth.orders_id = :orders_id order by oth.date_added');
-    $Qhistory->bindTable(':table_orders_transactions_history', TABLE_ORDERS_TRANSACTIONS_HISTORY);
-    $Qhistory->bindTable(':table_orders_transactions_status', TABLE_ORDERS_TRANSACTIONS_STATUS);
-    $Qhistory->bindInt(':language_id', $lC_Language->getID());
-    $Qhistory->bindInt(':orders_id', $oInfo->get('oID'));
-    $Qhistory->execute();
-
-    while ($Qhistory->next()) {
-      $qpreturnvals[] = array('status_id' => $Qhistory->valueInt('transaction_code'),
-                                            'status' => $Qhistory->value('status_name'),
-                                            'return_value' => $Qhistory->value('transaction_return_value'),
-                                            'return_status' => $Qhistory->valueInt('transaction_return_status'),
-                                            'date_added' => $Qhistory->value('date_added'));
-    }
-			$qp = new quickpay;
-			$xmlObj = simplexml_load_string($qpreturnvals[0]["return_value"]);
-            $responseArr = $qp->objectsIntoArray($xmlObj);
-
-			  $transaction = $responseArr["transaction"];
-			  $cardtype = $responseArr["cardtype"];
-			  $cardnumber = $responseArr["cardnumber"];
-			  $cardhash = $responseArr["cardhash"];
-			  
-			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/functions/quickpay5.php");
-			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_actions.php");
-			  include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_gui_admin.php");
-			  
+				include(DIR_FS_CATALOG."addons/Quickpay_Payments/QuickpayApi.php");
+	$api= new QuickpayApi();
+	$api->setOptions(ADDONS_PAYMENT_QUICKPAY_PAYMENTS_USERAPIKEY);
+	            include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_js.php");
+				include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/quickpay10.php");
+                include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_actions.php");
+                include(DIR_FS_CATALOG."addons/Quickpay_Payments/admin/orders_gui_admin.php");
+				
+				
 			     ?>
         
    

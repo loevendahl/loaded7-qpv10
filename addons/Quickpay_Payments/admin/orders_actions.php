@@ -9,8 +9,8 @@ if (isset($qpaction)) {
 
             break;
         case 'quickpay_capture':
-            if (!isset($_GET['amount_big']) || $_GET['amount_big'] == '' || $_GET['amount_big'] == 0) {
-               lc_redirect("index.php?orders=".$oInfo->get('oID')."&amp;action=save");
+            if (!isset($_GET['amount_big']) || $_GET['amount_big'] == '' ) {
+               lc_redirect("index.php?orders=".$oInfo->get('oID')."&action=save");
             }
             // convert amount from local currency-format to required quickpay format 
             $amount = $_GET['amount_big'] . sprintf('%02d', $_GET['amount_small']);

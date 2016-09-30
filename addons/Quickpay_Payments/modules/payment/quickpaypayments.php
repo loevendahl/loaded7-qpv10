@@ -1,4 +1,14 @@
 <?php
+
+//ini_set("display_errors","on");
+//error_reporting(E_ALL);
+
+//ini_set("log_errors", 1);
+//ini_set("error_log", "/home/dan31362/public_html/loaded/php-error.log");
+//error_log( "Hello, errors!" );
+
+ include('addons/Quickpay_Payments/QuickpayApi.php');
+
 /**
 *  $Id: quickpaypayments.php v1.0 2013-01-01 datazen $
 *
@@ -73,12 +83,15 @@ class lC_Payment_quickpaypayments extends lC_Payment {
  /**
   * Constructor
   */
+ 
   public function lC_Payment_quickpaypayments() {
     global $lC_Language;
 
     $this->_title = $lC_Language->get('payment_quickpaypayments_title');
     $this->_method_title = $lC_Language->get('payment_quickpaypayments_method_title');
-    $this->_status = (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS') && (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS == '1') ? true : false);
+  $this->_status = (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS') && (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS == '1') ? true : false);
+  
+  
     $this->_sort_order = (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SORT_ORDER') ? ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SORT_ORDER : null);
 	$this->creditcardgroup = array();
 	$this->email_footer = ($cardlock == "viabill" ? DENUNCIATION : '');
@@ -86,9 +99,9 @@ class lC_Payment_quickpaypayments extends lC_Payment {
     // CUSTOMIZE THIS SETTING FOR THE NUMBER OF PAYMENT GROUPS NEEDED
         $this->num_groups = 5;
 
-    if (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS')) {
-      $this->initialize();
-    }
+   if (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_STATUS')) {
+    $this->initialize();
+   }
   }
  /**
   * Initialize the payment module
@@ -107,7 +120,7 @@ class lC_Payment_quickpaypayments extends lC_Payment {
       $this->_order_status_complete = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ORDER_STATUS_COMPLETE_ID;
     }
 
-    if (is_object($order)) $this->update_status();
+ if (is_object($order)) $this->update_status();
         // Store online payment options in local variable
         for ($i = 1; $i <= $this->num_groups; $i++) {
             if (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_GROUP' . $i) && constant('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_GROUP' . $i) != '') {
@@ -124,14 +137,15 @@ class lC_Payment_quickpaypayments extends lC_Payment {
             }
 			
         }
-    if (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TESTMODE') && ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TESTMODE == '1') {
-      $this->iframe_relay_url = 'https://secure.quickpay.dk/form/';  // sandbox url
-    } else {
-      $this->iframe_relay_url = 'https://secure.quickpay.dk/form/';  // production url
-    }
-  //  $this->iframe_params = $this->_getIframeParams();
-  //$this->form_action_url = lc_href_link(FILENAME_CHECKOUT, 'payment_template', 'SSL', true, true, true) ;   
- $this->form_action_url = 'https://secure.quickpay.dk/form/';
+   // if (defined('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TESTMODE') && ADDONS_PAYMENT_QUICKPAY_PAYMENTS_TESTMODE == '1') {
+   //   $this->iframe_relay_url = 'https://secure.quickpay.dk/form/';  // sandbox url
+   // } else {
+	 //    $this->form_action_url = lc_href_link(FILENAME_CHECKOUT, 'payment_template', 'SSL', true, true, true) ;
+      //$this->iframe_relay_url = 'https://payment.quickpay.net/';  // production url
+   // }
+  $this->iframe_params = $this->_getIframeParams();
+  $this->form_action_url = lc_href_link(FILENAME_CHECKOUT, 'confirmation', 'SSL', true, true, true) ;   
+ //$this->form_action_url = '#';
   }
  /**
   * Disable module if zone selected does not match billing zone
@@ -168,6 +182,8 @@ class lC_Payment_quickpaypayments extends lC_Payment {
 	        if (!isset($_SESSION['qp_card'])){ $_SESSION['qp_card'] = $qp_card;}
         if (isset($_POST['qp_card'])){ $_SESSION['qp_card'] = $_POST['qp_card'];}
          $_SESSION['quickpay_fee'] = $this->get_order_fee();
+
+ 
   }
  /**
   * Return the payment selections array
@@ -176,10 +192,11 @@ class lC_Payment_quickpaypayments extends lC_Payment {
   * @return array
   */
   public function selection() {
+
         global $lC_Language, $order, $lC_Currencies, $qp_card, $cardlock, $fee;
 		if (isset($_SESSION['quickpay_fee'])){ unset($_SESSION['quickpay_fee']);}
         $qty_groups = 0;
-		$imgpath="addons/Quickpay_Payments/images/";
+		$imgpath = "addons/Quickpay_Payments/images/";
 		$fees =array();
         for ($i = 1; $i <= $this->num_groups; $i++) {
             if (constant('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_GROUP' . $i) == '') {
@@ -271,6 +288,9 @@ $icon = (file_exists($imgpath."cc_".$option."_payment.gif") ? $imgpath."cc_".$op
 		if(strstr($icon, "_payment")){
 			$w=120;
 			$h= 27;
+			if(strstr($icon, "3d")){
+				$w=60;
+			}
 		}else{
 			   $w= 35;
 			   $h= 22;
@@ -419,6 +439,7 @@ $_SESSION['quickpay_fee'] = $this->get_order_fee();
   * @return string
   */
   public function process_button() {
+
     global  $lC_Language, $lC_ShoppingCart, $lC_Currencies, $lC_Customer;  
 	$_SESSION['cartSync']['paymentMethod'] = $this->_code;
     $orderid = lC_Order::insert(ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PROCESSING_STATUS_ID);
@@ -429,7 +450,8 @@ $_SESSION['quickpay_fee'] = $this->get_order_fee();
     $_SESSION['cartSync']['prepOrderID'] = $_SESSION['prepOrderID'];  
     $_SESSION['cartSync']['orderCreated'] = TRUE;
 	$_SESSION['cartSync']['orderID'] = $orderid;
-  return $this->_iframe_params($orderid);
+ 
+ return $this->_iframe_params($orderid);
 
   }
  /**
@@ -465,118 +487,140 @@ $_SESSION['quickpay_fee'] = $this->get_order_fee();
     global $lC_Language, $lC_ShoppingCart, $lC_Currencies, $lC_Customer;
 	$process_button_string = '';
 		$process_fields ='';
+ if($_POST['callquickpay'] == "go") {
         $process_parameters = array();
 
-        $qp_protocol = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PROTOCOL;
-        $qp_msgtype = 'authorize';
-        $qp_merchant_id = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SHOPID;
-		    if (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MODE == '1') {
-			$qp_testmode = '1';
-			}else{
-			$qp_testmode = '0';	
-				
-			}
-
-
-// TODO: dynamic language switching instead of hardcoded mapping
-        
+       // $qp_protocol = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PROTOCOL;
+       // $qp_msgtype = 'authorize';
+        $qp_merchant_id = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MERCHANTID;
+		$qp_aggreement_id = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_AGGREEMENTID;
+		$qp_apikey = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_USERAPIKEY;    
 		
 		$lang_split = explode("_",$_SESSION['language']);
 		$qp_language = $lang_split[0];
-   /*     switch ($lang_split[0]) {
-            case "en_US": $qp_language = "en";
-                break;
-            case "swedish": $qp_language = "se";
-                break;
-            case "norwegian": $qp_language = "no";
-                break;
-            case "german": $qp_language = "de";
-                break;
-            case "french": $qp_language = "fr";
-                break;
-        }
-	*/
 
-        $qp_order_id = $order_id;
+
+        $qp_order_id = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ORDERPREFIX.$order_id;
 		$qp_order_amount = 100 * $lC_Currencies->formatRaw($lC_ShoppingCart->getTotal(), $lC_Currencies->getCode());
-        $qp_currency_code = $_SESSION['currency'];
-        $qp_ok_page = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'checkout.php?process';
-        $qp_error_page = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'callback.php?qperror=cancel&qporder='.$order_id;
-        $qp_callback_page = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'callback.php';
-        $qp_autocapture = '0';
+        $qp_vat_amount = ($order->info['tax'] ? $order->info['tax'] : "0.00");
+			$qp_product_id = "P03";
+			$qp_category = MODULE_PAYMENT_QUICKPAY_ADVANCED_PAII_CAT;
+			$qp_reference_title = $qp_order_id;
+		$qp_currency_code = $_SESSION['currency'];
+       
+	    $qp_continueurl = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'checkout.php?process';
+        $qp_cancelurl = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'callback.php?qperror=cancel&qporder='.$order_id;
+        $qp_callbackurl = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'callback.php?qporder='.$qp_order_id;
+        $qp_autofee = (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_AUTOFEE == '1' ? '1' :'0');
+		$qp_autocapture = (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_AUTOCAPTURE == '1' ? '1' :'0');
         $qp_cardtypelock = $_POST['cardlock'];
+		$qp_subscription = (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SUBSCRIPTION == '1' ? '1' :'0');
 
-   
-            $qp_md5word = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_MD5WORD;
-
-		
-$qp_splitpayment = (ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SPLIT == "1" ? '1' : '0');
-$qp_forcemobile = '0';
-$qp_deadline = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_DEADLINE;
-$qp_cardhash = '1';
-
-        $qp_md5check = md5($qp_protocol . $qp_msgtype . $qp_merchant_id . $qp_language . $qp_order_id . $qp_order_amount . $qp_currency_code . $qp_ok_page . $qp_error_page . $qp_callback_page . $qp_autocapture . $qp_cardtypelock . $qp_testmode . $qp_splitpayment . $qp_forcemobile . $qp_deadline . $qp_cardhash . $qp_md5word);
+			            $qp_description = $qp_order_id;
+						$qp_category = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_CAT;
+						$qp_product_id = "P03";
+						$qp_vat_amount = ($_SESSION['lC_ShoppingCart_data']['tax'] > 0 ? $_SESSION['lC_ShoppingCart_data']['tax'] : "0.00");				
+				
 
 
 // register fields to hand over
-        $process_parameters['protocol'] = $qp_protocol;
-        $process_parameters['msgtype'] = $qp_msgtype;
-        $process_parameters['merchant'] = $qp_merchant_id;
-        $process_parameters['language'] = $qp_language;
-        $process_parameters['ordernumber'] = $qp_order_id;
-        $process_parameters['amount'] = $qp_order_amount;
-        $process_parameters['currency'] = $qp_currency_code;
-        $process_parameters['continueurl'] = $qp_ok_page;
-        $process_parameters['cancelurl'] = $qp_error_page;
-        $process_parameters['callbackurl'] = $qp_callback_page;
-        $process_parameters['autocapture'] = $qp_autocapture;
-        $process_parameters['cardtypelock'] = $qp_cardtypelock;
-        $process_parameters['testmode'] = $qp_testmode;
-		$process_parameters['splitpayment'] = $qp_splitpayment;
-		$process_parameters['forcemobile'] = $qp_forcemobile;
-		$process_parameters['deadline'] = $qp_deadline;
-		$process_parameters['cardhash'] = $qp_cardhash;
-        $process_parameters['md5check'] = $qp_md5check;
 
 
-        reset($process_parameters);
+		$process_parameters = array(
+					'agreement_id'                 => $qp_aggreement_id,
+					'amount'                       => $qp_order_amount,
+					'autocapture'                  => $qp_autocapture,
+					'autofee'                      => $qp_autofee,
+					//'branding_id'                  => $qp_branding_id,
+					'callbackurl'                  => $qp_callbackurl,
+					'cancelurl'                    => $qp_cancelurl,
+					'continueurl'                  => $qp_continueurl,
+					'currency'                     => $qp_currency_code,
+					'description'                  => $qp_description,
+					'google_analytics_client_id'   => $qp_google_analytics_client_id,
+					'google_analytics_tracking_id' => $analytics_tracking_id,
+					'language'                     => $qp_language,
+					'merchant_id'                  => $qp_merchant_id,
+					'order_id'                     => $qp_order_id,
+					'payment_methods'              => $qp_cardtypelock,
+					'product_id'                   => $qp_product_id,
+					'category'                     => $qp_category,
+					'reference_title'              => $qp_reference_title,
+					'vat_amount'                   => $qp_vat_amount,
+					'subscription'                 => $qp_subscription,
+					'version'                      => 'v10'
+						);
+						
+     /*   reset($process_parameters);
         while (list ($key, $value) = each($process_parameters)) {
             $process_fields .= lc_draw_hidden_field($key, $value) . "\n";
         }
-
+*/
       //custom vars
-	   $customvar_array = array('customers_id' => $customer_id,
-                    'customers_name' => $lC_ShoppingCart->getBillingAddress('firstname') . ' ' . $lC_ShoppingCart->getBillingAddress('lastname'),
-                    'customers_company' => $lC_ShoppingCart->getBillingAddress('company'),
-                    'customers_street_address' => $lC_ShoppingCart->getBillingAddress('street_address'),
-                    'customers_suburb' => $lC_ShoppingCart->getBillingAddress('suburb'),
-                    'customers_city' => $lC_ShoppingCart->getBillingAddress('city'),
-                    'customers_postcode' => $lC_ShoppingCart->getBillingAddress('postcode'),
-                    'customers_state' => $lC_ShoppingCart->getBillingAddress('state'),
-                    'customers_country' => $lC_ShoppingCart->getBillingAddress('country_iso_code_3'),
-                    'customers_telephone' => $lC_Customer->getTelephone(),
-                    'customers_email_address' => $lC_Customer->getEmailAddress(),
-                    'date_purchased' => date("d")."-".date("m")."-".date("Y"),
-                    'shopversion' => 'Loaded Commerce'); 
+	   $customvar_array = array('variables[customers_id]' => $customer_id,
+                    'variables[customers_name]' => $lC_ShoppingCart->getBillingAddress('firstname') . ' ' . $lC_ShoppingCart->getBillingAddress('lastname'),
+                    'variables[customers_company]' => $lC_ShoppingCart->getBillingAddress('company'),
+                    'variables[customers_street_address]' => $lC_ShoppingCart->getBillingAddress('street_address'),
+                    'variables[customers_suburb]' => $lC_ShoppingCart->getBillingAddress('suburb'),
+                    'variables[customers_city]' => $lC_ShoppingCart->getBillingAddress('city'),
+                    'variables[customers_postcode]' => $lC_ShoppingCart->getBillingAddress('postcode'),
+                    'variables[customers_state]' => $lC_ShoppingCart->getBillingAddress('state'),
+                    'variables[customers_country]' => $lC_ShoppingCart->getBillingAddress('country_iso_code_3'),
+                    'variables[customers_telephone]' => $lC_Customer->getTelephone(),
+                    'variables[customers_email_address]' => $lC_Customer->getEmailAddress(),
+                    'variables[date_purchased]' => date("d")."-".date("m")."-".date("Y"),
+                    'variables[shopversion]' => 'Loaded Commerce 7'); 
                        
-        while (list ($key, $value) = each($customvar_array)) {
+       /* while (list ($key, $value) = each($customvar_array)) {
             $process_fields .= lc_draw_hidden_field("CUSTOM_".$key, $value) . "\n";
         }
-		
-		if($qp_cardtypelock =='paii') {
-			            $process_fields .= lc_draw_hidden_field("CUSTOM_reference_title",$qp_order_id );
-						$process_fields .= lc_draw_hidden_field("CUSTOM_category", ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_CAT );
-						$process_fields .= lc_draw_hidden_field("CUSTOM_product_id", "P03");
-						$process_fields .= lc_draw_hidden_field("CUSTOM_vat_amount", $_SESSION['lC_ShoppingCart_data']['tax']);				
-				
-			}
-		
+		*/
+
+	$process_parameters = array_merge($process_parameters,$customvar_array);
 	
-        $process_button_string .= $process_fields;
+       // $process_button_string .= $process_fields;
 
+	   $apiorder= new QuickpayApi();
+	$apiorder->setOptions(ADDONS_PAYMENT_QUICKPAY_PAYMENTS_USERAPIKEY);
+	
+	//set status request mode
+	$apiorder->mode = ($qp_subscription == "0" ? "payments/" : "subscriptions/");
+	  	//been here before?
+	$exists = $this->get_quickpay_order_status($qp_order_id, $apiorder->mode);
+	
+  $qid = $exists["qid"];
+	//set to create/update mode
+	
+  if($exists["qid"] == null){
+
+      //create new quickpay order	
+  $storder = $apiorder->createorder($qp_order_id, $qp_currency_code, $process_parameters);
+  $qid = $storder["id"];
+
+    }else{
+    $qid = $exists["qid"];
+    }
+			
+		
+		$storder = $apiorder->link($qid, $process_parameters);
+	ob_end_clean();
+		header("location: "	.$storder['url']);
+	exit;
+	/*$process_button_string .= json_encode($process_parameters)."<script>
+     alert('qp ".$qp_order_id."-".$order_id."');
+// window.location.replace('".$storder['url']."');
+      </script>";
+*/
+	
+	 
+}else{
         $process_button_string .= lc_draw_hidden_field('qp_card', $_POST['qp_card']);
-
-        return $process_button_string;
+        $process_button_string .= lc_draw_hidden_field('cardlock', $_POST['cardlock']);
+		$process_button_string .= lc_draw_hidden_field('callquickpay', 'go');
+      
+}
+     
+	 return $process_button_string;     
 }
   
   
@@ -663,6 +707,39 @@ $qp_cardhash = '1';
         }
 		return $quickpay_fee;
     }
+private function get_quickpay_order_status($qp_order_id,$mode="") {
+
+	$api= new QuickpayApi();
+	
+
+	$api->setOptions(ADDONS_PAYMENT_QUICKPAY_PAYMENTS_USERAPIKEY);
+
+  try {
+	$api->mode = ($mode=="payments/" ? "payments?order_id=" : "subscriptions?order_id=");
+	
+
+    // Commit the status request, checking valid transaction id
+    $st = $api->status($qp_order_id);
+		$eval = array();
+	if($st[0]["id"]){
+
+    $eval["oid"] = str_replace(ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ORDERPREFIX,"", $st[0]["order_id"]);
+	$eval["qid"] = $st[0]["id"];
+	}else{
+	$eval["oid"] = null;
+	$eval["qid"] = null;	
+	}
+  
+  } catch (Exception $e) {
+   $eval = 'QuickPay Status: ';
+		  	// An error occured with the status request
+          $eval .= 'Problem: ' . $e->getMessage() ;
+	
+  }
+
+    return $eval;
+  } 
+
 
     private function get_payment_options_name($payment_option) {
 		global $lC_Language;
