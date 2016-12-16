@@ -7,6 +7,8 @@
   @license    https://github.com/loadedcommerce/loaded7/blob/master/LICENSE.txt
   @version    $Id: lc_cfg_set_output_compression_pulldown_menu.php v1.0 2013-08-08 datazen $
 */
+
+//deprecated, but might be reused for other future purposes
 function lc_cfg_set_paii_list_pulldown_menu() {
   global $lC_Database;
 

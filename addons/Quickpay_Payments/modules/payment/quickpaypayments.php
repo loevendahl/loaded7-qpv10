@@ -502,10 +502,10 @@ $_SESSION['quickpay_fee'] = $this->get_order_fee();
 
         $qp_order_id = ADDONS_PAYMENT_QUICKPAY_PAYMENTS_ORDERPREFIX.$order_id;
 		$qp_order_amount = 100 * $lC_Currencies->formatRaw($lC_ShoppingCart->getTotal(), $lC_Currencies->getCode());
-        $qp_vat_amount = ($order->info['tax'] ? $order->info['tax'] : "0.00");
-			$qp_product_id = "P03";
-			$qp_category = MODULE_PAYMENT_QUICKPAY_ADVANCED_PAII_CAT;
-			$qp_reference_title = $qp_order_id;
+        //$qp_vat_amount = ($order->info['tax'] ? $order->info['tax'] : "0.00");
+		//	$qp_product_id = "P03";
+		//	$qp_category = MODULE_PAYMENT_QUICKPAY_ADVANCED_PAII_CAT;
+		//	$qp_reference_title = $qp_order_id;
 		$qp_currency_code = $_SESSION['currency'];
        
 	    $qp_continueurl = HTTP_SERVER.DIR_WS_HTTP_CATALOG.'checkout.php?process';
@@ -537,16 +537,16 @@ $_SESSION['quickpay_fee'] = $this->get_order_fee();
 					'continueurl'                  => $qp_continueurl,
 					'currency'                     => $qp_currency_code,
 					'description'                  => $qp_description,
-					'google_analytics_client_id'   => $qp_google_analytics_client_id,
-					'google_analytics_tracking_id' => $analytics_tracking_id,
+					//'google_analytics_client_id'   => $qp_google_analytics_client_id,
+					//'google_analytics_tracking_id' => $analytics_tracking_id,
 					'language'                     => $qp_language,
 					'merchant_id'                  => $qp_merchant_id,
 					'order_id'                     => $qp_order_id,
 					'payment_methods'              => $qp_cardtypelock,
-					'product_id'                   => $qp_product_id,
-					'category'                     => $qp_category,
-					'reference_title'              => $qp_reference_title,
-					'vat_amount'                   => $qp_vat_amount,
+					//'product_id'                   => $qp_product_id,
+					//'category'                     => $qp_category,
+					//'reference_title'              => $qp_reference_title,
+					//'vat_amount'                   => $qp_vat_amount,
 					'subscription'                 => $qp_subscription,
 					'version'                      => 'v10'
 						);
@@ -779,7 +779,7 @@ private function get_quickpay_order_status($qp_order_id,$mode="") {
             case 'fbg1886': return $lC_Language->get('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_FBG1886_TEXT');
             case 'paypal': return $lC_Language->get('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAYPAL_TEXT');
             case 'sofort': return $lC_Language->get('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_SOFORT_TEXT');
-            case 'paii': return $lC_Language->get('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_TEXT');
+           // case 'paii': return $lC_Language->get('ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_TEXT');
 
         }
         return '';

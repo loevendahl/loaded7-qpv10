@@ -335,12 +335,7 @@
       <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_IBILL_DESCRIPTION</key>
       <value><![CDATA[Buy now - pay when you wish]]></value>
       <group>checkout</group>
-    </definition>
-    <definition>
-      <key>ADDONS_PAYMENT_QUICKPAY_PAYMENTS_PAII_TEXT</key>
-      <value><![CDATA[Paii mobile payment]]></value>
-      <group>checkout</group>
-    </definition>
+    </definition>    
   <definition>
       <key>ENTRY_QUICKPAY_TRANSACTION</key>
       <value><![CDATA[QuickPay balance:]]></value>

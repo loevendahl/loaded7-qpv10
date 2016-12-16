@@ -121,7 +121,7 @@ class Quickpay_Payments extends lC_Addon { // your addon must extend lC_Addon
 		    $lC_Database->simpleQuery("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Group " . $i . " Payments fee', 'ADDONS_PAYMENT_" . strtoupper($this->_code) . "_GROUP" . $i . "_FEE', '" . $qp_groupfee . "', 'Fee for Group " . $i . " payments (fixed fee-percentage fee)<br>Example: <b>1.45:0.10</b>', '6', '6', 'lc_cfg_set_input_field', now())");
         }
 	
-$lC_Database->simpleQuery("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Swipp shop category', 'ADDONS_PAYMENT_" . strtoupper($this->_code) . "_PAII_CAT','', 'Must be set, if using Swipp, ', '6', '0','lc_cfg_set_paii_list_pulldown_menu', now())");	
+//$lC_Database->simpleQuery("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('Swipp shop category', 'ADDONS_PAYMENT_" . strtoupper($this->_code) . "_PAII_CAT','', 'Must be set, if using Swipp, ', '6', '0','lc_cfg_set_paii_list_pulldown_menu', now())");	
 
 	   
     $lC_Database->simpleQuery("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) values ('Payment Zone', 'ADDONS_PAYMENT_" . strtoupper($this->_code) . "_ZONE', '0', 'If a zone is selected, only enable this payment method for that zone.', '6', '2', 'lc_cfg_use_get_zone_class_title', 'lc_cfg_set_zone_classes_pull_down_menu', now())");
@@ -173,8 +173,7 @@ $lC_Database->simpleQuery("insert into " . TABLE_CONFIGURATION . " (configuratio
 		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_SORT_ORDER',
 		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_SUBSCRIPTION',
 		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_AUTOCAPTURE',
-		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_AUTOFEE',
-		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_PAII_CAT');
+		 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_AUTOFEE');
 		
         for ($i = 1; $i <= 5; $i++) {
             $this->_keys[] = 'ADDONS_PAYMENT_' . strtoupper($this->_code) . '_GROUP' . $i;
